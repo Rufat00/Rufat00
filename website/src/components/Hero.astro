@@ -1,0 +1,20 @@
+---
+import { portfolio } from '../config/portfolio';
+import Icon from './Icon.astro';
+import SocialLinks from './SocialLinks.astro';
+import RoleTags from './RoleTags.astro';
+---
+<main class="hero">
+  <div class="portrait"><img src={portfolio.portrait} alt={portfolio.portraitAlt} width="1122" height="1402" fetchpriority="high" /></div>
+  <section class="intro" aria-labelledby="name">
+    <div class="intro__content">
+      <RoleTags />
+      <h1 id="name">{portfolio.name}</h1>
+      <p class="description">{portfolio.description}</p>
+      <div class="actions">
+        <a class="resume" href={portfolio.resume.url || undefined} aria-disabled={!portfolio.resume.url || undefined} role={!portfolio.resume.url ? 'link' : undefined} title={portfolio.resume.url ? 'Open resume' : 'Resume coming soon'} target={portfolio.resume.url ? '_blank' : undefined} rel="noopener noreferrer">{portfolio.resume.label}<Icon name="arrow" /></a>
+        <SocialLinks />
+      </div>
+    </div>
+  </section>
+</main>

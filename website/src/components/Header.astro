@@ -1,0 +1,23 @@
+---
+import { portfolio } from "../config/portfolio";
+import Icon from "./Icon.astro";
+import SocialLinks from "./SocialLinks.astro";
+---
+
+<header class="header">
+    <a class="monogram" href="/" aria-label={`${portfolio.name} — home`}
+        >{portfolio.initials}<span>.</span></a
+    >
+    <div class="header-actions">
+        <SocialLinks labels />
+        <a
+            class="business-card-link"
+            href="/business-card/"
+            aria-label="Open business card"
+            title="Business card"
+        >
+            <Icon name="business-card" />
+        </a>
+    </div>
+    <a class="mobile-label" href="/business-card/">Business card ↗</a>
+</header>

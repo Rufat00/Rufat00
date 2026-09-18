@@ -1,0 +1,14 @@
+---
+import { portfolio } from '../config/portfolio';
+import Icon from './Icon.astro';
+interface Props { labels?: boolean; }
+const { labels = false } = Astro.props;
+---
+<nav class:list={['socials', { 'socials--labels': labels }]} aria-label={labels ? 'Social profiles' : 'Connect with me'}>
+  {portfolio.socials.map(({ name, icon, url }) => (
+    <a href={url || undefined} aria-label={name} aria-disabled={!url || undefined} role={!url ? 'link' : undefined} title={url ? name : `${name} — link coming soon`} target={url && !url.startsWith('mailto:') ? '_blank' : undefined} rel={url && !url.startsWith('mailto:') ? 'noopener noreferrer' : undefined}>
+      <Icon name={icon} />
+      {labels && <span>{name}</span>}
+    </a>
+  ))}
+</nav>

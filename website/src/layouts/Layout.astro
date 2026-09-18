@@ -1,0 +1,27 @@
+---
+import "@fontsource-variable/manrope";
+import "../styles/global.scss";
+import "../styles/portfolio.scss";
+import { portfolio } from "../config/portfolio";
+interface Props { title?: string; description?: string; }
+const { title = portfolio.name, description = portfolio.description } = Astro.props;
+const theme = Object.entries(portfolio.theme)
+    .map(([key, value]) => `--${key}: ${value}`)
+    .join(";");
+---
+
+<!doctype html>
+<html lang="en" style={theme}>
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+        <meta name="description" content={description} />
+        <meta name="theme-color" content={portfolio.theme.background} />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <title>{title}</title>
+    </head>
+    <body><slot /></body>
+</html>

@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import { portfolio } from "../config/portfolio";
+---
+
+<Layout>
+    <div class="portfolio">
+        <div class="ambient" aria-hidden="true"></div>
+        <Header />
+        <Hero />
+        <!-- <div class="edge-label">{portfolio.tagline}</div> -->
+    </div>
+</Layout>

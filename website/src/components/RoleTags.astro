@@ -1,0 +1,22 @@
+---
+import { portfolio } from '../config/portfolio';
+
+interface Props { roles?: string[]; }
+const { roles = portfolio.roles } = Astro.props;
+const tags = roles
+  .map((role) => role.trim().replace(/^[@#]+\s*/, ''))
+  .filter(Boolean);
+---
+
+{tags.length > 0 && (
+  <ul class="roles" aria-label="Roles and affiliations" role="list">
+    {tags.map((tag) => (
+      <li class="role-tag">
+        <svg class="role-tag__hash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <path d="M10 4 8 20M16 4 14 20M5 9h15M4 15h15" />
+        </svg>
+        <span class="role-tag__label">{tag}</span>
+      </li>
+    ))}
+  </ul>
+)}

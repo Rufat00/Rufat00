@@ -1,0 +1,13 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BusinessCard from '../components/BusinessCard.astro';
+import { businessCard } from '../config/business-card';
+import '../styles/business-card.scss';
+---
+
+<Layout title={`${businessCard.name} — Business card`} description={`Connect with ${businessCard.name}, ${businessCard.title}.`}>
+  <main class="business-page">
+    <div class="ambient" aria-hidden="true"></div>
+    <BusinessCard />
+  </main>
+</Layout>

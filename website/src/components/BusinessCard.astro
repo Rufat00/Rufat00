@@ -1,0 +1,119 @@
+---
+import { businessCard as card } from "../config/business-card";
+import Icon from "./Icon.astro";
+---
+
+<business-card
+    class="business-card"
+    data-mode="contact"
+    data-url={card.publicUrl}
+    data-name={card.name}
+    style={`--card-accent: ${card.accent}`}
+>
+    <header class="card-nav">
+        <a href="/" aria-label="Back to portfolio"
+            ><Icon name="arrow-left" /><span>Portfolio</span></a
+        >
+    </header>
+    <button
+        class="card-pull"
+        type="button"
+        aria-label="Show QR code"
+        aria-controls="card-qr"
+        aria-expanded="false"><span></span></button
+    >
+    <div class="card-qr" id="card-qr" inert aria-hidden="true">
+        <div class="card-qr__inner">
+            <canvas
+                aria-label={`QR code linking to ${card.name}'s business card`}
+                role="img"></canvas>
+        </div>
+    </div>
+    <article
+        class="contact-sheet"
+        aria-label={`${card.name}'s contact details`}
+    >
+        <div class="card-banner">
+            <img
+                src={card.banner}
+                alt={card.bannerAlt}
+                width="1400"
+                height="349"
+                fetchpriority="high"
+            />
+        </div>
+        <div class="card-body">
+            <div class="card-identity">
+                <div class="card-avatar">
+                    <img
+                        src={card.avatar}
+                        alt={card.avatarAlt}
+                        width="2268"
+                        height="2268"
+                        fetchpriority="high"
+                    />
+                </div>
+                <div class="card-qr-desktop">
+                    <canvas
+                        aria-label={`QR code linking to ${card.name}'s business card`}
+                        role="img"></canvas>
+                </div>
+            </div>
+            <div class="card-details">
+                <h1 class="card-name">{card.name}</h1>
+                <p class="card-subtitle">
+                    <span>{card.title}</span><span
+                        class="card-at"
+                        aria-hidden="true">@</span
+                    ><span>{card.organization}</span>
+                </p>
+                <ul class="card-contacts" role="list">
+                    {
+                        card.contacts.map((contact) => (
+                            <li>
+                                <a
+                                    href={contact.url || undefined}
+                                    aria-disabled={!contact.url || undefined}
+                                    target={
+                                        contact.url.startsWith("https:")
+                                            ? "_blank"
+                                            : undefined
+                                    }
+                                    rel={
+                                        contact.url.startsWith("https:")
+                                            ? "noopener noreferrer"
+                                            : undefined
+                                    }
+                                >
+                                    <span class="contact-icon">
+                                        <Icon name={contact.icon} />
+                                    </span>
+                                    <span class="contact-copy">
+                                        <>
+                                            <span class="contact-value">
+                                                {contact.value}
+                                            </span>
+                                            <span class="contact-label">
+                                                {contact.label}
+                                            </span>
+                                        </>
+                                    </span>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+    </article>
+    <footer class="card-footer">
+        <button class="card-share" type="button"
+            ><Icon name="share" /><span>Share my card</span></button
+        >
+        <p class="card-status" role="status" aria-live="polite"></p>
+    </footer>
+</business-card>
+
+<script>
+    import "../scripts/business-card";
+</script>
