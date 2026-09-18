@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-  <img src="https://media.tenor.com/hrnsC770gF8AAAAj/parrot-pixel.gif" width="120" />
+  <img src="https://media.tenor.com/jJD9AeZdqcAAAAAi/party-parrot.gif" width="120" />
 </p>
 
 <p align="center">
