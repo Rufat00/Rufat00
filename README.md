@@ -1,16 +1,32 @@
-## Hi there 👋
+<h1 align="center">Hey, I'm Rufat!</h1>
 
-<!--
-**Rufat00/Rufat00** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<p align="center">
+  <b>Computer Science student • Full-Stack Developer</b>
+</p>
 
-Here are some ideas to get you started:
+<p align="center">
+  I build full-stack applications, research tools, and AI-powered products with a focus on clean UX and practical software.
+</p>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+<p align="center">
+  <a href="https://rufat.me">
+    <img src="https://img.shields.io/badge/Website-rufat.me-000000?style=for-the-badge&logo=googlechrome&logoColor=white" />
+  </a>
+  <a href="mailto:hello@rufat.me">
+    <img src="https://img.shields.io/badge/Email-hello%40rufat.me-EA4335?style=for-the-badge&logo=gmail&logoColor=white" />
+  </a>
+  <a href="YOUR_LINKEDIN_URL">
+    <img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
+  </a>
+  <a href="YOUR_INSTAGRAM_URL">
+    <img src="https://img.shields.io/badge/Instagram-Follow-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
+  </a>
+</p>
+
+<p align="center">
+  <img src="https://media.tenor.com/hrnsC770gF8AAAAj/parrot-pixel.gif" width="120" />
+</p>
+
+<p align="center">
+  <i>Thanks for stopping by.</i>
+</p>
