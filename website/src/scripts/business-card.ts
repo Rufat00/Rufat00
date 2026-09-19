@@ -18,7 +18,7 @@ class BusinessCardElement extends HTMLElement {
     let wheelDistance = 0;
     let wheelTime = 0;
     let suppressClickUntil = 0;
-    let mouseTarget: HTMLElement = pull;
+    let mousePointer: number | null = null;
 
     const reveal = (progress: number) => {
       const amount = Math.max(0, Math.min(1, progress));
@@ -58,23 +58,35 @@ class BusinessCardElement extends HTMLElement {
     });
     this.addEventListener('pointerdown', (event) => {
       if (!mobile.matches || event.pointerType !== 'mouse' || event.button !== 0) return;
-      if (!(event.target as Element).closest('.card-pull') &&
-        (!open || (event.target as Element).closest('a, button'))) return;
-      event.preventDefault();
+      if (!open && sheet.scrollTop > 0 && !(event.target as Element).closest('.card-pull')) return;
+      mousePointer = event.pointerId;
+      startX = event.clientX;
       startY = event.clientY;
       distance = 0;
-      mouseTarget = (event.target as Element).closest('.card-pull') ? pull : this;
-      mouseTarget.setPointerCapture(event.pointerId);
+    });
+    // Links and images must not start the browser's native drag operation.
+    this.addEventListener('dragstart', (event) => {
+      if (mobile.matches) event.preventDefault();
     });
     this.addEventListener('pointermove', (event) => {
-      if (event.pointerType !== 'mouse' || !mouseTarget.hasPointerCapture(event.pointerId)) return;
-      distance = event.clientY - startY;
+      if (event.pointerType !== 'mouse' || mousePointer !== event.pointerId) return;
+      const dy = event.clientY - startY;
+      const dx = event.clientX - startX;
+      if (!this.hasPointerCapture(event.pointerId)) {
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) { mousePointer = null; return; }
+        if (Math.abs(dy) <= 8 || (!open && dy < 0) || (open && dy > 0)) return;
+        this.setPointerCapture(event.pointerId);
+      }
+      event.preventDefault();
+      distance = dy;
       drag(distance);
     });
-    this.addEventListener('pointerup', (event) => {
-      if (event.pointerType !== 'mouse' || !mouseTarget.hasPointerCapture(event.pointerId)) return;
-      mouseTarget.releasePointerCapture(event.pointerId);
-      if (Math.abs(distance) > 8) suppressClickUntil = Date.now() + 400;
+    window.addEventListener('pointerup', (event) => {
+      if (event.pointerType !== 'mouse' || mousePointer !== event.pointerId) return;
+      mousePointer = null;
+      if (!this.hasPointerCapture(event.pointerId)) return;
+      this.releasePointerCapture(event.pointerId);
+      suppressClickUntil = Date.now() + 400;
       if ((!open && distance > 65) || (open && distance < -65)) {
         suppressClickUntil = Date.now() + 400;
         setOpen(!open);
@@ -82,7 +94,7 @@ class BusinessCardElement extends HTMLElement {
         setOpen(open);
       }
     });
-    this.addEventListener('pointercancel', () => setOpen(open));
+    this.addEventListener('pointercancel', () => { mousePointer = null; setOpen(open); });
     this.addEventListener('click', (event) => {
       if (Date.now() < suppressClickUntil) {
         event.preventDefault();
@@ -113,8 +125,7 @@ class BusinessCardElement extends HTMLElement {
     // Expanded cards use upward drags to close; the normal view can scroll.
     this.addEventListener('touchstart', (event) => {
       tracking = mobile.matches && event.touches.length === 1 &&
-        (open || (sheet.scrollTop <= 0 &&
-          !(event.target as Element).closest('a, button:not(.card-pull)')));
+        (open || sheet.scrollTop <= 0 || !!(event.target as Element).closest('.card-pull'));
       if (!tracking) return;
       startX = event.touches[0].clientX;
       startY = event.touches[0].clientY;
@@ -125,6 +136,7 @@ class BusinessCardElement extends HTMLElement {
       const dy = event.touches[0].clientY - startY;
       const dx = event.touches[0].clientX - startX;
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 8) { tracking = false; setOpen(open); return; }
+      if (Math.abs(dy) <= 8 && !this.hasAttribute('data-dragging')) return;
       if ((!open && dy <= 0) || (open && dy >= 0)) {
         distance = 0;
         if (this.hasAttribute('data-dragging')) drag(0);

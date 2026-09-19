@@ -3,8 +3,20 @@ import "@fontsource-variable/manrope";
 import "../styles/global.scss";
 import "../styles/portfolio.scss";
 import { portfolio } from "../config/portfolio";
-interface Props { title?: string; description?: string; }
-const { title = portfolio.name, description = portfolio.description } = Astro.props;
+interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    imageAlt?: string;
+}
+const {
+    title = `${portfolio.name} — Software Developer Portfolio`,
+    description = portfolio.description,
+    image = portfolio.portrait,
+    imageAlt = portfolio.portraitAlt,
+} = Astro.props;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image, Astro.site);
 const theme = Object.entries(portfolio.theme)
     .map(([key, value]) => `--${key}: ${value}`)
     .join(";");
@@ -19,6 +31,21 @@ const theme = Object.entries(portfolio.theme)
             content="width=device-width, initial-scale=1, viewport-fit=cover"
         />
         <meta name="description" content={description} />
+        <meta name="author" content={portfolio.name} />
+        <link rel="canonical" href={canonicalUrl.href} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={portfolio.name} />
+        <meta property="og:locale" content="en_US" />
+        <meta property="og:url" content={canonicalUrl.href} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={imageUrl.href} />
+        <meta property="og:image:alt" content={imageAlt} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={imageUrl.href} />
+        <meta name="twitter:image:alt" content={imageAlt} />
         <meta name="theme-color" content={portfolio.theme.background} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <title>{title}</title>

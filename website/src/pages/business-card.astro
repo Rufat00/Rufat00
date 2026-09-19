@@ -5,7 +5,12 @@ import { businessCard } from '../config/business-card';
 import '../styles/business-card.scss';
 ---
 
-<Layout title={`${businessCard.name} — Business card`} description={`Connect with ${businessCard.name}, ${businessCard.title}.`}>
+<Layout
+  title={`${businessCard.name} — Business Card`}
+  description={`Connect with ${businessCard.name}, ${businessCard.title} at ${businessCard.organization}. Save contact details and explore social profiles.`}
+  image={businessCard.avatar}
+  imageAlt={businessCard.avatarAlt}
+>
   <main class="business-page">
     <div class="ambient" aria-hidden="true"></div>
     <BusinessCard />

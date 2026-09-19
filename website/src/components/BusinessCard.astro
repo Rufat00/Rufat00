@@ -72,8 +72,16 @@ import Icon from "./Icon.astro";
                         card.contacts.map((contact) => (
                             <li>
                                 <a
-                                    href={contact.url.startsWith('tel:') ? '/business-card/contact.vcf' : contact.url || undefined}
-                                    aria-label={contact.url.startsWith('tel:') ? `Add ${card.name} to contacts` : undefined}
+                                    href={
+                                        contact.url.startsWith("tel:")
+                                            ? "/business-card/contact.vcf"
+                                            : contact.url || undefined
+                                    }
+                                    aria-label={
+                                        contact.url.startsWith("tel:")
+                                            ? `Add ${card.name} to contacts`
+                                            : undefined
+                                    }
                                     aria-disabled={!contact.url || undefined}
                                     target={
                                         contact.url.startsWith("https:")
@@ -95,7 +103,9 @@ import Icon from "./Icon.astro";
                                                 {contact.value}
                                             </span>
                                             <span class="contact-label">
-                                                {contact.url.startsWith('tel:') ? 'Add to contacts' : contact.label}
+                                                {contact.url.startsWith("tel:")
+                                                    ? "Add to contacts"
+                                                    : contact.label}
                                             </span>
                                         </>
                                     </span>
@@ -109,7 +119,7 @@ import Icon from "./Icon.astro";
     </article>
     <footer class="card-footer">
         <button class="card-share" type="button"
-            ><Icon name="share" /><span>Share my card</span></button
+            ><Icon name="share" /><span>Share the card</span></button
         >
         <p class="card-status" role="status" aria-live="polite"></p>
     </footer>
