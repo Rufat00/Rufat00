@@ -15,7 +15,7 @@ export const portfolio = {
   portraitAlt: 'Portrait of Rufat Niftaliyev',
   resume: {
     label: 'View Resume',
-    url: '/resume.pdf',
+    url: '/Resume.pdf',
   },
   socials: [
     { name: 'GitHub', icon: 'github', url: 'https://github.com/Rufat00' },
