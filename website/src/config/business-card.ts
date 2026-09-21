@@ -12,7 +12,7 @@ export const businessCard = {
   accent: '#5265a8',
   contacts: [
     { label: 'Email', value: 'contact@rufat.me', icon: 'email', url: 'mailto:contact@rufat.me' },
-    { label: 'Phone', value: '(123) 456-7890', icon: 'phone', url: 'tel:1234567890' },
+    { label: 'Phone', value: '(210) 920-4230', icon: 'phone', url: 'tel:+12109204230' },
     { label: 'LinkedIn', value: 'Rufat Niftaliyev', icon: 'linkedin', url: 'https://www.linkedin.com/in/rufat-niftaliyev/' },
     { label: 'Instagram', value: '@rufat.niftaliyev', icon: 'instagram', url: 'https://www.instagram.com/rufat.niftaliyev/' },
   ],
